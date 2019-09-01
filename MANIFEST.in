@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include pricing_rule *.css
+recursive-include pricing_rule *.csv
+recursive-include pricing_rule *.html
+recursive-include pricing_rule *.ico
+recursive-include pricing_rule *.js
+recursive-include pricing_rule *.json
+recursive-include pricing_rule *.md
+recursive-include pricing_rule *.png
+recursive-include pricing_rule *.py
+recursive-include pricing_rule *.svg
+recursive-include pricing_rule *.txt
+recursive-exclude pricing_rule *.pyc
