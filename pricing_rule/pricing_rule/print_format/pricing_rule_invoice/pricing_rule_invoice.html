@@ -1,0 +1,182 @@
+<div class="row">
+    <div class="col-xs-2">
+
+    </div>
+        <div class="col-xs-10" align="center">
+            <b>NANDANA TRADING</b>
+            <br>
+            Importers & General Hardware Merchants
+            <br>
+            Authorized Dealer of Lanka Aluminum
+            <br>
+            40C, Hospital road, Nagoda Kalutara
+            <br>
+            Tel/Fax: 034 22 888 00, 0701 69 88 00 Email: sales@nandanatrading.com
+            <br>
+            Web: www.nandanatrading.com
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-2">
+    <b>Invoice #:</b>
+    </div>
+    <div class="col-xs-4">
+        {{ doc.name }}
+    </div>
+      <div class="col-xs-2">
+    <b>Date:</b>
+    </div>
+    <div class="col-xs-4">
+        {{ doc.posting_date }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-2">
+    <b>Customer Name:</b>
+    </div>
+    <div class="col-xs-4">
+        {{ doc.customer_name }}
+    </div>
+      <div class="col-xs-2">
+    <b>Set Source Warehouse:</b>
+    </div>
+    <div class="col-xs-4">
+        {{ doc.set_warehouse }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-2">
+    <b>Address:</b>
+    </div>
+    <div class="col-xs-4">
+        {{ doc.address_display }}
+    </div>
+      <div class="col-xs-2">
+    </div>
+    <div class="col-xs-4">
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+     <div class="col-xs-12">
+<table class="table" border="1">
+
+<tr>
+    <th>
+        Sr
+    </th>
+    <th>
+        Item
+    </th>
+    <th>
+        Description
+    </th>
+    <th>
+        Qty
+    </th>
+    <th>
+        Rate
+    </th>
+     <th>
+        Dis %
+    </th>
+     <th>
+        Dis Amount
+    </th>
+     <th>
+        Net Rate
+    </th>
+     <th>
+        Amount
+    </th>
+</tr>
+    {%- for row in doc.items -%}
+    <tr>
+        <td>
+            {{ loop.index }}
+        </td>
+        <td>
+            {{ row.item_code }}
+        </td>
+        <td>
+             {{ row.description }}
+        </td>
+        <td>
+             {{ row.qty }}
+        </td>
+         <td>
+             {{ row.get_formatted("rate", doc) }}
+        </td>
+        <td>
+             %{{ row.discount_percentage }}
+        </td>
+         <td>
+             {{ row.get_formatted("discount_amount", doc) }}
+        </td>
+            <td>
+                {{ row.get_formatted("net_rate", doc) }}
+        </td>
+            <td>
+                {{ row.get_formatted("amount", doc) }}
+        </td>
+    </tr>
+{%- endfor -%}
+</table>
+         </div></div>
+
+
+<div class="row">
+    <div class="col-xs-2">
+    <b>In Words:</b>
+    </div>
+    <div class="col-xs-4">
+        {{ doc.in_words }}
+    </div>
+      <div class="col-xs-2">
+    <b>Total:</b>
+    </div>
+    <div class="col-xs-4">
+        {{ doc.get_formatted('total') }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-2">
+    <b></b>
+    </div>
+    <div class="col-xs-4">
+
+    </div>
+      <div class="col-xs-2">
+    <b>Additional Dis Amt</b>
+    </div>
+    <div class="col-xs-4">
+        {{ doc.get_formatted('discount_amount') }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-2">
+    <b></b>
+    </div>
+    <div class="col-xs-4">
+
+    </div>
+      <div class="col-xs-2">
+          <b>Grand Total</b>
+    </div>
+    <div class="col-xs-4">
+       <b>{{ doc.get_formatted('grand_total') }} </b>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        {{ doc.terms }}
+    </div>
+</div>
