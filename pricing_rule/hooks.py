@@ -129,3 +129,4 @@ doctype_js = {
 # 	"frappe.desk.doctype.event.event.get_events": "pricing_rule.event.get_events"
 # }
 
+fixtures = ["Custom Script"]
