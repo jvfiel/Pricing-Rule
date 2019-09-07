@@ -18,7 +18,8 @@ frappe.ui.form.on("Sales Order Item", {
                 method: "pricing_rule.pricing_rule.get_pricing",
                 args: {
                     item: row.item_code,
-                    uom: row.uom
+                    uom: row.uom,
+                    pricelist:cur_frm.doc.selling_price_list
                 },
                 callback: function (r) {
                         if(!isEmpty(r.message)) {
@@ -48,7 +49,8 @@ frappe.ui.form.on("Sales Order Item", {
                     method: "pricing_rule.pricing_rule.get_pricing",
                     args: {
                         item: row.item_code,
-                        uom: row.uom
+                        uom: row.uom,
+                        pricelist:cur_frm.doc.selling_price_list
                     },
                     callback: function (r) {
                         console.log(r);

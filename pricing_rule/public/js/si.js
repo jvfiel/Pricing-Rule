@@ -10,7 +10,8 @@ frappe.ui.form.on("Sales Invoice Item", {
                 method: "pricing_rule.pricing_rule.get_pricing",
                 args: {
                     item: row.item_code,
-                    uom: row.uom
+                    uom: row.uom,
+                    pricelist:cur_frm.doc.selling_price_list
                 },
                 callback: function (r) {
                     console.log(r);
@@ -32,7 +33,8 @@ frappe.ui.form.on("Sales Invoice Item", {
                     method: "pricing_rule.pricing_rule.get_pricing",
                     args: {
                         item: row.item_code,
-                        uom: row.uom
+                        uom: row.uom,
+                        pricelist:cur_frm.doc.selling_price_list
                     },
                     callback: function (r) {
                         console.log(r);
