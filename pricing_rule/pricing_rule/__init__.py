@@ -42,3 +42,14 @@ def filter_uom(item):
     print uoms
 
     return uoms
+
+@frappe.whitelist()
+def filter_uom_rate(item,uom):
+    print "*****************filter_uom......."
+    uoms = frappe.db.sql("""SELECT conversion_factor FROM `tabUOM Conversion Detail` WHERE parent=%s AND uom=%s""",(item,uom))
+
+    print uoms
+    if uoms:
+        return uoms[0][0]
+    else:
+        return None

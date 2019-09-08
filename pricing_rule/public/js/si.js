@@ -25,7 +25,7 @@ frappe.ui.form.on("Sales Invoice Item", "item_code", function(doc,cdt,cdn){
                     // 		// console.log(df);
                     // 		df.options = r.message;
                     console.log(options_new);
-                    frappe.meta.get_docfield("Sales Invoice Item", "uom_select", cur_frm.doc.name).options = options_new
+                    frappe.meta.get_docfield("Sales Invoice Item", "uom_select", cur_frm.doc.name).options = options_new;
                     refresh_field("items");
                 }
             }
@@ -41,7 +41,24 @@ frappe.ui.form.on("Sales Invoice Item", {
         let row = frappe.get_doc(cdt, cdn);
         row.uom = row.uom_select;
 
-         if(row.item_code && row.uom) {
+         if(row.item_code && row.uom)
+         {
+
+              frappe.call({
+                  method: "pricing_rule.pricing_rule.filter_uom_rate",
+                  args: {
+                      item: row.item_code,
+                      uom:row.uom
+                  },
+                  callback: function (data) {
+                      if (data.message) {
+                          var options = data.message;
+                          console.log(options);
+                          row.conversion_factor =options;
+                      }
+                  }
+              });
+
             frappe.call({
                 method: "pricing_rule.pricing_rule.get_pricing",
                 args: {
@@ -73,18 +90,6 @@ frappe.ui.form.on("Sales Invoice Item", {
     item_code: function (doc, cdt, cdn) {
           let me = this;
         let row = frappe.get_doc(cdt, cdn);
-
-        // console.log(row.item_code);
-        // cur_frm.fields_dict.items.grid.get_field('uom').get_query =
-        // function() {
-        //     return {
-        //
-        //         query: "pricing_rule.pricing_rule.filter_uom",
-        //     filters: {
-        //         "item":row.item_code
-        //     }
-        //     }
-        // };
 
 
 
