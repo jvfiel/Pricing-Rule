@@ -33,3 +33,12 @@ def filter_uom(doctype, txt, searchfield, start, page_len, filters):
     print uoms
 
     return uoms
+
+@frappe.whitelist()
+def filter_uom(item):
+    print "*****************filter_uom......."
+    uoms = frappe.db.sql("""SELECT uom FROM `tabUOM Conversion Detail` WHERE parent=%s""",(item))
+
+    print uoms
+
+    return uoms

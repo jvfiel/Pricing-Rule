@@ -6,25 +6,55 @@ function isEmpty(obj) {
     return true;
 }
 
+frappe.ui.form.on("Sales Order Item", "item_code", function(doc,cdt,cdn){
+     let row = frappe.get_doc(cdt, cdn);
+frappe.call({
+    method: "pricing_rule.pricing_rule.filter_uom",
+    args:{
+         item: row.item_code
+    },
+    callback: function(data){
+if(data.message){
+		var options = data.message;
+		console.log(data.message.length);
+		console.log("options.join:"+options.join("\n"));
+		var options_new = options.join("\n");
 
-frappe.ui.form.on("Sales Order Item", {
+    // var df = frappe.meta.get_docfield('Show Hide Desktop Icons','icon', cur_frm.doc.name);
+		// 		// console.log(df);
+		// 		df.options = r.message;
+        console.log(options_new);
+		frappe.meta.get_docfield("Sales Order Item", "uom_select", cur_frm.doc.name).options = options_new
+    refresh_field("items");
+	}
+    }
+    });
+});
+
+
+frappe.ui.form.on("Sales Invoice Item", {
+
+    uom_select:function(doc,cdt,cdn)
+    {
+        let row = frappe.get_doc(cdt, cdn);
+        row.uom = row.uom_select;
+        refresh_field("items");
+    },
     item_code: function (doc, cdt, cdn) {
           let me = this;
         let row = frappe.get_doc(cdt, cdn);
 
-
-        cur_frm.fields_dict.items.grid.get_field('uom').get_query =
-         cur_frm.fields_dict.items.grid.get_field('uom').get_query =
-        function() {
-            return {
-
-                query: "pricing_rule.pricing_rule.filter_uom",
-            filters: {
-                "item":row.item_code
-            }
-            }
-        };
-
+        // console.log(row.item_code);
+        // cur_frm.fields_dict.items.grid.get_field('uom').get_query =
+        // function() {
+        //     return {
+        //
+        //         query: "pricing_rule.pricing_rule.filter_uom",
+        //     filters: {
+        //         "item":row.item_code
+        //     }
+        //     }
+        // };
 
 
 
