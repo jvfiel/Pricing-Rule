@@ -8,27 +8,29 @@ function isEmpty(obj) {
 
 frappe.ui.form.on("Sales Invoice Item", "item_code", function(doc,cdt,cdn){
      let row = frappe.get_doc(cdt, cdn);
-frappe.call({
-    method: "pricing_rule.pricing_rule.filter_uom",
-    args:{
-         item: row.item_code
-    },
-    callback: function(data){
-if(data.message){
-		var options = data.message;
-		console.log(data.message.length);
-		console.log("options.join:"+options.join("\n"));
-		var options_new = options.join("\n");
+    if(row.item_code) {
+        frappe.call({
+            method: "pricing_rule.pricing_rule.filter_uom",
+            args: {
+                item: row.item_code
+            },
+            callback: function (data) {
+                if (data.message) {
+                    var options = data.message;
+                    console.log(data.message.length);
+                    console.log("options.join:" + options.join("\n"));
+                    var options_new = options.join("\n");
 
-    // var df = frappe.meta.get_docfield('Show Hide Desktop Icons','icon', cur_frm.doc.name);
-		// 		// console.log(df);
-		// 		df.options = r.message;
-        console.log(options_new);
-		frappe.meta.get_docfield("Sales Invoice Item", "uom_select", cur_frm.doc.name).options = options_new
-    refresh_field("items");
-	}
+                    // var df = frappe.meta.get_docfield('Show Hide Desktop Icons','icon', cur_frm.doc.name);
+                    // 		// console.log(df);
+                    // 		df.options = r.message;
+                    console.log(options_new);
+                    frappe.meta.get_docfield("Sales Invoice Item", "uom_select", cur_frm.doc.name).options = options_new
+                    refresh_field("items");
+                }
+            }
+        });
     }
-    });
 });
 
 
