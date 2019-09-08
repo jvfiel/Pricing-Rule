@@ -19,6 +19,7 @@
 
     </div>
 </div>
+<br>
 <div class="row">
     <div class="col-xs-2">
     <b>Invoice #:</b>
@@ -143,10 +144,13 @@
     <div class="col-xs-4">
         {{ doc.in_words }}
     </div>
-      <div class="col-xs-2">
+    <div class="col-xs-1">
+
+    </div>
+      <div class="col-xs-3">
     <b>Total:</b>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-2" align="right">
         {{ doc.get_formatted('total') }}
     </div>
 </div>
@@ -158,10 +162,11 @@
     <div class="col-xs-4">
 
     </div>
-      <div class="col-xs-2">
+    <div class="col-xs-1"></div>
+      <div class="col-xs-3">
     <b>Additional Dis Amt</b>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-2" align="right">
         {{ doc.get_formatted('discount_amount') }}
     </div>
 </div>
@@ -173,10 +178,11 @@
     <div class="col-xs-4">
 
     </div>
-      <div class="col-xs-2">
+    <div class="col-xs-1"></div>
+      <div class="col-xs-3">
           <b>Grand Total</b>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-2" align="right">
        <b>{{ doc.get_formatted('grand_total') }} </b>
     </div>
 </div>
