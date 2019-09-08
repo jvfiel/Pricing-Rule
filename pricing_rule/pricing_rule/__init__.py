@@ -24,3 +24,12 @@ def get_pricing(item,uom,pricelist):
         frappe.db.commit()
 
     return pricing_rule
+
+@frappe.whitelist()
+def filter_uom(doctype, txt, searchfield, start, page_len, filters):
+    print "*****************filter_uom......."
+    uoms = frappe.db.sql("""SELECT uom FROM `tabUOM Conversion Detail` WHERE parent=%s""",(filters.get("item")))
+
+    print uoms
+
+    return uoms

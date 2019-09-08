@@ -6,10 +6,26 @@ function isEmpty(obj) {
     return true;
 }
 
+
 frappe.ui.form.on("Sales Order Item", {
     item_code: function (doc, cdt, cdn) {
           let me = this;
         let row = frappe.get_doc(cdt, cdn);
+
+
+        cur_frm.fields_dict.items.grid.get_field('uom').get_query =
+        function() {
+            return {
+
+                method: "pricing_rule.pricing_rule.filter_uom",
+            filters: {
+                "item":row.item_code
+            }
+            }
+        };
+
+
+
         console.log("pricing rule**");
         console.log(row);
 
