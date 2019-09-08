@@ -12,12 +12,12 @@ frappe.ui.form.on("Sales Invoice Item", {
           let me = this;
         let row = frappe.get_doc(cdt, cdn);
 
-
+        console.log(row.item_code);
         cur_frm.fields_dict.items.grid.get_field('uom').get_query =
         function() {
             return {
 
-                method: "pricing_rule.pricing_rule.filter_uom",
+                query: "pricing_rule.pricing_rule.filter_uom",
             filters: {
                 "item":row.item_code
             }

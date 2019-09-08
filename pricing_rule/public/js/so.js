@@ -14,15 +14,17 @@ frappe.ui.form.on("Sales Order Item", {
 
 
         cur_frm.fields_dict.items.grid.get_field('uom').get_query =
+         cur_frm.fields_dict.items.grid.get_field('uom').get_query =
         function() {
             return {
 
-                method: "pricing_rule.pricing_rule.filter_uom",
+                query: "pricing_rule.pricing_rule.filter_uom",
             filters: {
                 "item":row.item_code
             }
             }
         };
+
 
 
 
