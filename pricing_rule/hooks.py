@@ -129,4 +129,4 @@ app_license = "MIT"
 # 	"frappe.desk.doctype.event.event.get_events": "pricing_rule.event.get_events"
 # }
 
-fixtures = ["Custom Script"]
+fixtures = ["Custom Script","Custom Field","Property Setter"]
